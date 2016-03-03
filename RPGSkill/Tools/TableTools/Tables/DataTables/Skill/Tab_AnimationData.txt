@@ -1,0 +1,2 @@
+Id	StartTime	ClipName	Layer	Speed	Weight	WrapMode	BlendMode	CrossTime
+#INT	INT	STRING	INT	FLOAT	FLOAT	STRING	STRING	FLOAT

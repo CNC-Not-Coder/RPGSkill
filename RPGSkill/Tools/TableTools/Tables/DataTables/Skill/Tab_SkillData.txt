@@ -1,0 +1,2 @@
+Id	RuleId0	EffectId0	SoundId0	AnimationId0
+#INT	INT	INT	INT	INT

@@ -1,0 +1,2 @@
+Id	LogicId	EffectId0	AnimationId0	SoundId0	Param0	Param1
+#INT	INT	INT	INT	INT	STRING	STRING
