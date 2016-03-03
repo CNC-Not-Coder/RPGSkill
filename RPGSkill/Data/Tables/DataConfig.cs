@@ -37,7 +37,7 @@ namespace DataTableSpace
             return Id;
         }
     }
-    public class Tab_AnimationDataData : DataInstance<Tab_AnimationData> { }
+    public class Tab_AnimationDataProvider : DataInstance<Tab_AnimationData> { }
     
     public class Tab_BufferData : IDataUnit
     {
@@ -63,7 +63,7 @@ namespace DataTableSpace
             return Id;
         }
     }
-    public class Tab_BufferDataData : DataInstance<Tab_BufferData> { }
+    public class Tab_BufferDataProvider : DataInstance<Tab_BufferData> { }
     
     public class Tab_EffectData : IDataUnit
     {
@@ -72,11 +72,11 @@ namespace DataTableSpace
 		public int DeleteTime;
 		public string Resource;
 		public string Bone;
-		public int IsAttach;
+		public bool IsAttach;
 		public string Position;
 		public string Rotation;
 		public string Scale;
-		public int IsBullet;
+		public bool IsBullet;
 		
         public void Load(MyDataRow row)
         {
@@ -85,11 +85,11 @@ namespace DataTableSpace
 			DeleteTime = DataParser.Parse<int>(row, "DeleteTime", -1);
 			Resource = DataParser.Parse<string>(row, "Resource", string.Empty);
 			Bone = DataParser.Parse<string>(row, "Bone", string.Empty);
-			IsAttach = DataParser.Parse<int>(row, "IsAttach", -1);
+			IsAttach = DataParser.Parse<bool>(row, "IsAttach", false);
 			Position = DataParser.Parse<string>(row, "Position", string.Empty);
 			Rotation = DataParser.Parse<string>(row, "Rotation", string.Empty);
 			Scale = DataParser.Parse<string>(row, "Scale", string.Empty);
-			IsBullet = DataParser.Parse<int>(row, "IsBullet", -1);
+			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
 			
         }
         public int GetId()
@@ -97,7 +97,7 @@ namespace DataTableSpace
             return Id;
         }
     }
-    public class Tab_EffectDataData : DataInstance<Tab_EffectData> { }
+    public class Tab_EffectDataProvider : DataInstance<Tab_EffectData> { }
     
     public class Tab_RuleData : IDataUnit
     {
@@ -121,7 +121,7 @@ namespace DataTableSpace
             return Id;
         }
     }
-    public class Tab_RuleDataData : DataInstance<Tab_RuleData> { }
+    public class Tab_RuleDataProvider : DataInstance<Tab_RuleData> { }
     
     public class Tab_SkillData : IDataUnit
     {
@@ -145,7 +145,7 @@ namespace DataTableSpace
             return Id;
         }
     }
-    public class Tab_SkillDataData : DataInstance<Tab_SkillData> { }
+    public class Tab_SkillDataProvider : DataInstance<Tab_SkillData> { }
     
     public class Tab_SoundData : IDataUnit
     {
@@ -165,18 +165,18 @@ namespace DataTableSpace
             return Id;
         }
     }
-    public class Tab_SoundDataData : DataInstance<Tab_SoundData> { }
+    public class Tab_SoundDataProvider : DataInstance<Tab_SoundData> { }
     
     public partial class DataProvider
     {
         private void LoadAllData()
         {
-            LoadData(Tab_AnimationDataData.Instance, "Skill/Tab_AnimationData.txt");
-			LoadData(Tab_BufferDataData.Instance, "Skill/Tab_BufferData.txt");
-			LoadData(Tab_EffectDataData.Instance, "Skill/Tab_EffectData.txt");
-			LoadData(Tab_RuleDataData.Instance, "Skill/Tab_RuleData.txt");
-			LoadData(Tab_SkillDataData.Instance, "Skill/Tab_SkillData.txt");
-			LoadData(Tab_SoundDataData.Instance, "Skill/Tab_SoundData.txt");
+            LoadData(Tab_AnimationDataProvider.Instance, "Skill/Tab_AnimationData.txt");
+			LoadData(Tab_BufferDataProvider.Instance, "Skill/Tab_BufferData.txt");
+			LoadData(Tab_EffectDataProvider.Instance, "Skill/Tab_EffectData.txt");
+			LoadData(Tab_RuleDataProvider.Instance, "Skill/Tab_RuleData.txt");
+			LoadData(Tab_SkillDataProvider.Instance, "Skill/Tab_SkillData.txt");
+			LoadData(Tab_SoundDataProvider.Instance, "Skill/Tab_SoundData.txt");
 			
         }
     }
