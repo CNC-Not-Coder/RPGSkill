@@ -1,2 +1,3 @@
-Id	LogicId	EffectId0	AnimationId0	SoundId0	Param0	Param1
-#INT	INT	INT	INT	INT	STRING	STRING
+Id	LogicId	IsBullet	EffectId0	AnimationId0	SoundId0	Param0	Param1
+#INT	INT	BOOL	INT	INT	INT	STRING	STRING
+#id	逻辑Id，对应到代码	根据子弹速度计算延时	特效（可以有多个）	动画（可以有多个）	声音（可以有多个）	与逻辑相关的参数	

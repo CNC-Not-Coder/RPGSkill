@@ -49,9 +49,13 @@
     <Compile Include="Skill\Client\AnimationComponent.cs" />
     <Compile Include="Skill\Client\EffectComponent.cs" />
     <Compile Include="Skill\Public\SkillComponent.cs" />
+    <Compile Include="Skill\Public\TypedDataCollection.cs" />
     <Compile Include="Skill\Server\RuleComponent.cs" />
     <Compile Include="Skill\Public\SkillInstance.cs" />
     <Compile Include="Skill\Client\SoundComponent.cs" />
+    <Compile Include="Skill\Server\RuleLogic\RuleData.cs" />
+    <Compile Include="Skill\Server\RuleLogic\RuleLogic.cs" />
+    <Compile Include="Skill\Server\RuleLogic\RuleLogicManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -43,6 +43,7 @@ namespace DataTableSpace
     {
         public int Id;
 		public int LogicId;
+		public bool IsBullet;
 		public List<int> EffectIdList;
 		public List<int> AnimationIdList;
 		public List<int> SoundIdList;
@@ -52,6 +53,7 @@ namespace DataTableSpace
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
 			LogicId = DataParser.Parse<int>(row, "LogicId", -1);
+			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			AnimationIdList = DataParser.ParseList<int>(row, "AnimationId", -1);
 			SoundIdList = DataParser.ParseList<int>(row, "SoundId", -1);
@@ -126,6 +128,7 @@ namespace DataTableSpace
     public class Tab_SkillData : IDataUnit
     {
         public int Id;
+		public float CheckRange;
 		public List<int> RuleIdList;
 		public List<int> EffectIdList;
 		public List<int> SoundIdList;
@@ -134,6 +137,7 @@ namespace DataTableSpace
         public void Load(MyDataRow row)
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
+			CheckRange = DataParser.Parse<float>(row, "CheckRange", 0f);
 			RuleIdList = DataParser.ParseList<int>(row, "RuleId", -1);
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			SoundIdList = DataParser.ParseList<int>(row, "SoundId", -1);
