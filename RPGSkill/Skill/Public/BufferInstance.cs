@@ -1,25 +1,25 @@
 ﻿
 /*
+ * Buffer实例类，和技能实例基本一样，Buffer可以叠加
  * Usage:
  * Init --> Start
  * Reset --> Start
- * 可以考虑缓存起来
  * */
-using DataTableSpace;
 using System.Collections.Generic;
-
 namespace RPGSkill
 {
-    public class SkillInstance
+    public class BufferInstance
     {
-        private int m_SkillId;
-        private List<int> m_RuleIds;
+        private int m_BufferId;
+        private int m_LogicId;
+        private int m_Delay;
+        private bool m_IsBullet;
         private List<int> m_EffectIds;
+        private List<int> m_AnimationIds;
         private List<int> m_SoundIds;
-        private List<int> m_AnimIds;
 
-        private float m_SkillSpeed;
         private long m_curTime;
+        private float m_BufferSpeed;//对于子弹类型的Buffer需要根据位移进行时间缩放
         private List<SkillComponent> m_Components;
         private InstanceData m_InstanceData;
 
@@ -27,65 +27,15 @@ namespace RPGSkill
         public int TargetId;
         public bool IsActive;
 
-        public int GetId()
+        public bool Init(int bufferId)
         {
-            return m_SkillId;
+            m_BufferId = bufferId;
+            return Load(bufferId);
         }
-
-        public bool Init(int skillId)
+        protected bool Load(int bufferId)
         {
-            m_SkillId = skillId;
-
-            return Load(skillId);
-        }
-        protected bool Load(int skillId)
-        {
-            Tab_SkillData data = Tab_SkillDataProvider.Instance.GetDataById(skillId);
-            if (data == null)
-                return false;
-            m_RuleIds = new List<int>(data.RuleIdList);
-            m_EffectIds = new List<int>(data.EffectIdList);
-            m_SoundIds = new List<int>(data.SoundIdList);
-            m_AnimIds = new List<int>(data.AnimationIdList);
-
-            m_Components = new List<SkillComponent>();
-
             //TODO:区分服务器和客户端，这个方法要摘出去
-            //if(IsServer)...
-            int ct = m_RuleIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_RuleIds[i] == -1) break;
-                RuleComponent rc = new RuleComponent();
-                rc.Init(m_RuleIds[i]);
-                AddComponent(rc);
-            }
-            ct = m_EffectIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_EffectIds[i] == -1) break;
-                EffectComponent ec = new EffectComponent();
-                ec.Init(m_EffectIds[i]);
-                AddComponent(ec);
-            }
-            ct = m_SoundIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_SoundIds[i] == -1) break;
-                SoundComponent sc = new SoundComponent();
-                sc.Init(m_SoundIds[i]);
-                AddComponent(sc);
-            }
-            ct = m_AnimIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_AnimIds[i] == -1) break;
-                AnimationComponent ac = new AnimationComponent();
-                ac.Init(m_AnimIds[i]);
-                AddComponent(ac);
-            }
-
-            return true;
+            return false;
         }
         public void Start(int sender, int target)
         {
@@ -121,14 +71,14 @@ namespace RPGSkill
         }
         public void Reset()
         {
-            m_SkillSpeed = 1f;
+            m_BufferSpeed = 1f;
             m_curTime = 0;
             SenderId = -1;
             TargetId = -1;
             IsActive = false;
             m_InstanceData = null;
 
-            if(m_Components != null)
+            if (m_Components != null)
             {
                 int ct = m_Components.Count;
                 for (int i = 0; i < ct; i++)
@@ -146,7 +96,7 @@ namespace RPGSkill
             if (!IsActive)
                 return;
             m_curTime += deltaTime;
-            if(m_Components != null)
+            if (m_Components != null)
             {
                 int ct = m_Components.Count;
                 for (int i = 0; i < ct; i++)

@@ -2,9 +2,14 @@
 
 namespace RPGSkill
 {
+    public class InstanceData
+    {
+        public int SenderId = -1;
+        public int TargetId = -1;
+        public TypedDataCollection CustomData = new TypedDataCollection();
+    }
     public class SkillComponent
     {
-        public SkillInstance SkillInst = null;
         public bool IsActive = false;
         protected int startTime = 0;
         public virtual void Init(int id)
@@ -15,7 +20,7 @@ namespace RPGSkill
         {//重置临时数据
             IsActive = false;
         }
-        public virtual bool Tick(long deltaTime)
+        public virtual bool Tick(long deltaTime, long curTime, InstanceData instanceData)
         {
             return false;
         }

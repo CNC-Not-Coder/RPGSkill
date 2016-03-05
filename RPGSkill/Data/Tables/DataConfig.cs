@@ -43,6 +43,7 @@ namespace DataTableSpace
     {
         public int Id;
 		public int LogicId;
+		public int Delay;
 		public bool IsBullet;
 		public List<int> EffectIdList;
 		public List<int> AnimationIdList;
@@ -53,6 +54,7 @@ namespace DataTableSpace
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
 			LogicId = DataParser.Parse<int>(row, "LogicId", -1);
+			Delay = DataParser.Parse<int>(row, "Delay", -1);
 			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			AnimationIdList = DataParser.ParseList<int>(row, "AnimationId", -1);

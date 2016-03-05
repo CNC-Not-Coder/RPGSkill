@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace RPGSkill
 {
     
-    class RuleLogicManager
+    public class RuleLogicManager
     {
         private Dictionary<RuleLogicType, IRuleLogic> m_Rules = new Dictionary<RuleLogicType, IRuleLogic>();
         private static RuleLogicManager s_Instance = new RuleLogicManager();

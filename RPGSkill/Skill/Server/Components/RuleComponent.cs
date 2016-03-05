@@ -8,7 +8,7 @@ using DataTableSpace;
 using System.Collections.Generic;
 namespace RPGSkill
 {
-    class RuleComponent : SkillComponent
+    public class RuleComponent : SkillComponent
     {
         public int Id = -1;
         public int LogicId = -1;
@@ -16,6 +16,11 @@ namespace RPGSkill
 
         private IRuleLogic m_Logic = null;
         private RuleData m_RuleData = new RuleData();
+
+        public int SenderId = -1;
+        public int TargetId = -1;
+
+        private bool IsFirstAdd = false;
         
         public override void Init(int id)
         {
@@ -28,6 +33,8 @@ namespace RPGSkill
             startTime = data.StartTime;
 
             RuleLogicType ruleType = (RuleLogicType)LogicId;
+            m_RuleData = new RuleData();
+            m_RuleData.RuleId = id;
             IRuleLogic logic = RuleLogicManager.Instance.GetRuleByType(ruleType);
             m_Logic = logic;
 
@@ -35,20 +42,30 @@ namespace RPGSkill
         }
         public override void Reset()
         {
+            IsFirstAdd = false;
             base.Reset();
         }
-        public override bool Tick(long deltaTime)
+        public override bool Tick(long deltaTime, long curTime, InstanceData instanceData)
         {
-            if (SkillInst.CurTime < startTime)
+            if (curTime < startTime)
                 return true;
             if (m_Logic == null || m_RuleData == null)
                 return false;
-            List<int> targets = m_Logic.GetRuleResult(m_RuleData, SkillInst);
+            if(IsFirstAdd)
+            {
+                IsFirstAdd = false;
+                SenderId = instanceData.SenderId;
+                TargetId = instanceData.TargetId;
+                m_RuleData.CustomData.Clear();
+            }
+            
+            List<int> targets = m_Logic.GetRuleResult(m_RuleData, this);
             //TODO:给目标发送BUFFER
             return false;
         }
         public override void Start()
         {
+            IsFirstAdd = true;
             base.Start();
         }
         public override void Stop()

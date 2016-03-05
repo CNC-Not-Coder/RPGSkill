@@ -3,10 +3,10 @@
 using System.Collections.Generic;
 namespace RPGSkill
 {
-    enum RuleLogicType
+    public enum RuleLogicType
     {
         LockTarget = 0,
-        AreaDetect,
+        AreaDetect = 1,
     }
     public class IRuleLogic
     {
@@ -14,7 +14,7 @@ namespace RPGSkill
         {
 
         }
-        public virtual List<int> GetRuleResult(RuleData data, SkillInstance instance)
+        public virtual List<int> GetRuleResult(RuleData data, RuleComponent component)
         {
             return new List<int>();
         }
@@ -25,20 +25,22 @@ namespace RPGSkill
         {
             AreaDetectData param = new AreaDetectData();
             data.CustomData.AddData(param);
-            //TODO:
+            //TODO:解析参数
         }
-        public override List<int> GetRuleResult(RuleData data, SkillInstance instance)
+        public override List<int> GetRuleResult(RuleData data, RuleComponent component)
         {
-            return base.GetRuleResult(data, instance);
+            AreaDetectData area = data.CustomData.GetData<AreaDetectData>();
+            float range = area.Range;
+            return base.GetRuleResult(data, component);
         }
     }
 
     public class LockTargetRule : IRuleLogic
     {
-        public override List<int> GetRuleResult(RuleData data, SkillInstance instance)
+        public override List<int> GetRuleResult(RuleData data, RuleComponent component)
         {
             List<int> list = new List<int>();
-            list.Add(instance.TargetId);
+            list.Add(component.TargetId);
             return list;
         }
     }
