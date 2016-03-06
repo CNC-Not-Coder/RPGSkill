@@ -1,0 +1,2 @@
+Id	StartTime	DeleteTime	Resource	Bone	IsAttach	Position	Rotation	Scale	UseOnTarget	IsBullet
+#INT	INT	INT	STRING	STRING	BOOL	STRING	STRING	STRING	BOOL	BOOL

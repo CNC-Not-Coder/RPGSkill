@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGSkill", "RPGSkill\RPGSkill.csproj", "{39BA3BB0-E897-4FCA-B3DF-9E75BBBD5563}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public", "Public\Public.csproj", "{60ADAF26-2EED-457F-A681-1E16E45A1B84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{27F818A6-7989-4CE5-B818-470F0C19F93F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{39BA3BB0-E897-4FCA-B3DF-9E75BBBD5563}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +15,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60ADAF26-2EED-457F-A681-1E16E45A1B84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60ADAF26-2EED-457F-A681-1E16E45A1B84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60ADAF26-2EED-457F-A681-1E16E45A1B84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60ADAF26-2EED-457F-A681-1E16E45A1B84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27F818A6-7989-4CE5-B818-470F0C19F93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F818A6-7989-4CE5-B818-470F0C19F93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27F818A6-7989-4CE5-B818-470F0C19F93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27F818A6-7989-4CE5-B818-470F0C19F93F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39BA3BB0-E897-4FCA-B3DF-9E75BBBD5563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39BA3BB0-E897-4FCA-B3DF-9E75BBBD5563}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39BA3BB0-E897-4FCA-B3DF-9E75BBBD5563}.Release|Any CPU.ActiveCfg = Release|Any CPU

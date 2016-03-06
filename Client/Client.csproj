@@ -41,35 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Tables\DataConfig.cs" />
-    <Compile Include="Data\Tables\DataProvider.cs" />
-    <Compile Include="Data\Tables\MyDataTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Skill\Client\Components\AnimationComponent.cs" />
-    <Compile Include="Skill\Client\ClientBufferSystem.cs" />
-    <Compile Include="Skill\Client\ClientSkillSystem.cs" />
-    <Compile Include="Skill\Client\Components\EffectComponent.cs" />
-    <Compile Include="Skill\Public\BufferInstance.cs" />
-    <Compile Include="Skill\Public\SkillComponent.cs" />
-    <Compile Include="Skill\Public\TypedDataCollection.cs" />
-    <Compile Include="Skill\Server\Components\BufferComponent.cs" />
-    <Compile Include="Skill\Server\Components\BufferLogic\BufferData.cs" />
-    <Compile Include="Skill\Server\Components\BufferLogic\BufferLogic.cs" />
-    <Compile Include="Skill\Server\Components\BufferLogic\BufferLogicManager.cs" />
-    <Compile Include="Skill\Server\Components\RuleComponent.cs" />
-    <Compile Include="Skill\Public\SkillInstance.cs" />
-    <Compile Include="Skill\Client\Components\SoundComponent.cs" />
-    <Compile Include="Skill\Server\Components\RuleLogic\RuleData.cs" />
-    <Compile Include="Skill\Server\Components\RuleLogic\RuleLogic.cs" />
-    <Compile Include="Skill\Server\Components\RuleLogic\RuleLogicManager.cs" />
-    <Compile Include="Skill\Server\ServerBufferSystem.cs" />
-    <Compile Include="Skill\Server\ServerSkillSystem.cs" />
+    <Compile Include="Skill\Components\AnimationComponent.cs" />
+    <Compile Include="Skill\ClientBufferSystem.cs" />
+    <Compile Include="Skill\ClientSkillSystem.cs" />
+    <Compile Include="Skill\Components\EffectComponent.cs" />
+    <Compile Include="Skill\Components\SoundComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Public\Public.csproj">
+      <Project>{60adaf26-2eed-457f-a681-1e16e45a1b84}</Project>
+      <Name>Public</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

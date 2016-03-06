@@ -80,6 +80,7 @@ namespace DataTableSpace
 		public string Position;
 		public string Rotation;
 		public string Scale;
+		public bool UseOnTarget;
 		public bool IsBullet;
 		
         public void Load(MyDataRow row)
@@ -93,6 +94,7 @@ namespace DataTableSpace
 			Position = DataParser.Parse<string>(row, "Position", string.Empty);
 			Rotation = DataParser.Parse<string>(row, "Rotation", string.Empty);
 			Scale = DataParser.Parse<string>(row, "Scale", string.Empty);
+			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", false);
 			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
 			
         }
