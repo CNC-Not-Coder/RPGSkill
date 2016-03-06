@@ -44,7 +44,6 @@ namespace DataTableSpace
         public int Id;
 		public int LogicId;
 		public int Delay;
-		public bool IsBullet;
 		public List<int> EffectIdList;
 		public List<int> AnimationIdList;
 		public List<int> SoundIdList;
@@ -55,7 +54,6 @@ namespace DataTableSpace
             Id = DataParser.Parse<int>(row, "Id", -1);
 			LogicId = DataParser.Parse<int>(row, "LogicId", -1);
 			Delay = DataParser.Parse<int>(row, "Delay", -1);
-			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			AnimationIdList = DataParser.ParseList<int>(row, "AnimationId", -1);
 			SoundIdList = DataParser.ParseList<int>(row, "SoundId", -1);
@@ -82,6 +80,7 @@ namespace DataTableSpace
 		public string Scale;
 		public bool UseOnTarget;
 		public bool IsBullet;
+		public int BulletTime;
 		
         public void Load(MyDataRow row)
         {
@@ -96,6 +95,7 @@ namespace DataTableSpace
 			Scale = DataParser.Parse<string>(row, "Scale", string.Empty);
 			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", false);
 			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
+			BulletTime = DataParser.Parse<int>(row, "BulletTime", -1);
 			
         }
         public int GetId()

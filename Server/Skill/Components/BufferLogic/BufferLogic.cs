@@ -12,9 +12,18 @@ namespace RPGSkill
     public class IBufferLogic
     {
         public virtual void ParseData(BufferData data, List<string> args) { }
-        public virtual void Start(BufferData data) {}
-        public virtual void Stop(BufferData data) { }
-        public virtual void Interupt(BufferData data) { }
+        public virtual void Start(BufferData data)
+        {
+            data.IsActive = true;
+        }
+        public virtual void Stop(BufferData data)
+        {
+            data.IsActive = false;
+        }
+        public virtual void Interupt(BufferData data)
+        {
+            data.IsActive = false;
+        }
         public virtual void Tick(BufferData data) { }
         public virtual bool OnOtherBuffer(BufferData data)
         {
@@ -22,7 +31,7 @@ namespace RPGSkill
             return IsContinue;
         }
     }
-    //下面仅仅是举例子。距离buffer分类要看需求
+    //下面仅仅是举例子。具体buffer分类要看需求
 
     //单体一次性Buffer
     public class OneTimeBuffer : IBufferLogic

@@ -4,8 +4,10 @@ namespace RPGSkill
 {
     public class InstanceData
     {
+        public int InstanceId = -1;
         public int SenderId = -1;
         public int TargetId = -1;
+        public int SkillId = -1;
         public TypedDataCollection CustomData = new TypedDataCollection();
     }
     public class SkillComponent

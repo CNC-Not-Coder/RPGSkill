@@ -56,7 +56,7 @@ namespace RPGSkill
         {
             return true;
         }
-        public void Start(int sender, int target)
+        public void Start(int sender, int target, int skillId)
         {
             Reset();
             m_IsActive = true;
@@ -64,6 +64,8 @@ namespace RPGSkill
             m_InstanceData = new InstanceData();
             m_InstanceData.SenderId = sender;
             m_InstanceData.TargetId = target;
+            m_InstanceData.InstanceId = m_Id;
+            m_InstanceData.SkillId = skillId;
 
             if (m_Components != null)
             {

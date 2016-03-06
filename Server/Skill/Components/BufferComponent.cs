@@ -47,6 +47,7 @@ namespace RPGSkill
                 IsFirstAdd = false;
                 m_BufferData.SenderId = instanceData.SenderId;
                 m_BufferData.TargetId = instanceData.TargetId;
+                m_BufferData.SkillId = instanceData.SkillId;
                 m_BufferData.CustomData.Clear();
                 //获得Target上的所有BufferData
                 List<BufferData> buffers = ServerBufferSystem.Instance.GetBufferDatasByObjId(m_BufferData.TargetId);
@@ -67,6 +68,7 @@ namespace RPGSkill
                 {
                     m_Logic.Start(m_BufferData);
                 }
+                //记录BufferData
                 instanceData.CustomData.AddData(m_BufferData);
             }
             //例行检查状态
@@ -74,7 +76,7 @@ namespace RPGSkill
             {
                 m_Logic.Tick(m_BufferData);
             }
-            return false;
+            return m_BufferData.IsActive;
         }
         public override void Start()
         {
