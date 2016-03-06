@@ -14,7 +14,11 @@ namespace RPGSkill
         }
         public void SendBufferToTarget(int bufferId, int sender, int targetId)
         {
-            
+            //如果是子弹，这里需要根据距离计算buffer的时间缩放
+            //BufferInstance.ExecSpeed = ...
+
+            //同步给客户端
+
         }
         public List<BufferData> GetBufferDatasByObjId(int objId)
         {
@@ -25,7 +29,10 @@ namespace RPGSkill
                 int ct = buffs.Count;
                 for (int i = 0; i < ct; i++)
                 {
-                    //TODO:
+                    InstanceData inst = buffs[i].GetInstanceData();
+                    BufferData data = inst.CustomData.GetData<BufferData>();
+                    if (data != null)
+                        list.Add(data);
                 }
             }
             return list;

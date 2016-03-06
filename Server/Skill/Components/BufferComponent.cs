@@ -67,6 +67,7 @@ namespace RPGSkill
                 {
                     m_Logic.Start(m_BufferData);
                 }
+                instanceData.CustomData.AddData(m_BufferData);
             }
             //例行检查状态
             if(m_Logic != null)

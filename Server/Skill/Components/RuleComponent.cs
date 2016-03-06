@@ -60,7 +60,17 @@ namespace RPGSkill
             }
             
             List<int> targets = m_Logic.GetRuleResult(m_RuleData, this);
-            //TODO:给目标发送BUFFER
+            //给目标发送BUFFER
+            int ct = targets.Count;
+            for (int i = 0; i < ct; i++)
+            {
+                int len = Buffers.Count;
+                for (int j = 0; j < len; j++)
+                {
+                    ServerBufferSystem.Instance.SendBufferToTarget(Buffers[j], SenderId, TargetId);
+                }
+            }
+            
             return false;
         }
         public override void Start()

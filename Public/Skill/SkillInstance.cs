@@ -12,87 +12,55 @@ namespace RPGSkill
 {
     public class SkillInstance
     {
-        private int m_SkillId;
-        private List<int> m_RuleIds;
-        private List<int> m_EffectIds;
-        private List<int> m_SoundIds;
-        private List<int> m_AnimIds;
+        private int m_Id = -1;
+        private bool m_IsActive = false;
 
-        private float m_SkillSpeed;
-        private long m_curTime;
-        private List<SkillComponent> m_Components;
-        private InstanceData m_InstanceData;
+        private float m_ExecSpeed;
+        private long m_curTime = 0;
+        private List<SkillComponent> m_Components = new List<SkillComponent>();
+        private InstanceData m_InstanceData = new InstanceData();
 
-        public int SenderId;
-        public int TargetId;
-        public bool IsActive;
+        public int SenderId
+        {
+            get { return m_InstanceData.SenderId; }
+        }
+        public int TargetId
+        {
+            get { return m_InstanceData.TargetId; }
+        }
+
+        public bool IsActive
+        {
+            get { return m_IsActive; }
+        }
 
         public int GetId()
         {
-            return m_SkillId;
+            return m_Id;
         }
 
-        public bool Init(int skillId)
+        public float ExecSpeed
         {
-            m_SkillId = skillId;
+            get { return m_ExecSpeed; }
+            set { m_ExecSpeed = value; }
+        }
+
+        public bool Init(int skillId, List<SkillComponent> components)
+        {
+            m_Id = skillId;
+            m_Components = new List<SkillComponent>();
+            m_Components.AddRange(components);
 
             return Load(skillId);
         }
         protected bool Load(int skillId)
         {
-            Tab_SkillData data = Tab_SkillDataProvider.Instance.GetDataById(skillId);
-            if (data == null)
-                return false;
-            m_RuleIds = new List<int>(data.RuleIdList);
-            m_EffectIds = new List<int>(data.EffectIdList);
-            m_SoundIds = new List<int>(data.SoundIdList);
-            m_AnimIds = new List<int>(data.AnimationIdList);
-
-            m_Components = new List<SkillComponent>();
-
-            //TODO:区分服务器和客户端，这个方法要摘出去
-            //if(IsServer)...
-            //int ct = m_RuleIds.Count;
-            //for (int i = 0; i < ct; i++)
-            //{
-            //    if (m_RuleIds[i] == -1) break;
-            //    RuleComponent rc = new RuleComponent();
-            //    rc.Init(m_RuleIds[i]);
-            //    AddComponent(rc);
-            //}
-            //ct = m_EffectIds.Count;
-            //for (int i = 0; i < ct; i++)
-            //{
-            //    if (m_EffectIds[i] == -1) break;
-            //    EffectComponent ec = new EffectComponent();
-            //    ec.Init(m_EffectIds[i]);
-            //    AddComponent(ec);
-            //}
-            //ct = m_SoundIds.Count;
-            //for (int i = 0; i < ct; i++)
-            //{
-            //    if (m_SoundIds[i] == -1) break;
-            //    SoundComponent sc = new SoundComponent();
-            //    sc.Init(m_SoundIds[i]);
-            //    AddComponent(sc);
-            //}
-            //ct = m_AnimIds.Count;
-            //for (int i = 0; i < ct; i++)
-            //{
-            //    if (m_AnimIds[i] == -1) break;
-            //    AnimationComponent ac = new AnimationComponent();
-            //    ac.Init(m_AnimIds[i]);
-            //    AddComponent(ac);
-            //}
-
             return true;
         }
         public void Start(int sender, int target)
         {
             Reset();
-            IsActive = true;
-            SenderId = sender;
-            TargetId = target;
+            m_IsActive = true;
 
             m_InstanceData = new InstanceData();
             m_InstanceData.SenderId = sender;
@@ -109,7 +77,7 @@ namespace RPGSkill
         }
         public void Stop()
         {
-            IsActive = false;
+            m_IsActive = false;
             if (m_Components != null)
             {
                 int ct = m_Components.Count;
@@ -121,12 +89,10 @@ namespace RPGSkill
         }
         public void Reset()
         {
-            m_SkillSpeed = 1f;
+            m_ExecSpeed = 1f;
             m_curTime = 0;
-            SenderId = -1;
-            TargetId = -1;
-            IsActive = false;
-            m_InstanceData = null;
+            m_IsActive = false;
+            m_InstanceData = new InstanceData();
 
             if(m_Components != null)
             {
@@ -148,14 +114,20 @@ namespace RPGSkill
             m_curTime += deltaTime;
             if(m_Components != null)
             {
+                int activeCt = 0;
                 int ct = m_Components.Count;
                 for (int i = 0; i < ct; i++)
                 {
                     if (m_Components[i].IsActive)
                     {
+                        activeCt++;
                         bool isContinue = m_Components[i].Tick(deltaTime, m_curTime, m_InstanceData);
                         if (!isContinue) m_Components[i].IsActive = false;
                     }
+                }
+                if (activeCt < 1)
+                {
+                    Stop();
                 }
             }
         }
@@ -170,6 +142,10 @@ namespace RPGSkill
         public long CurTime
         {
             get { return m_curTime; }
+        }
+        public InstanceData GetInstanceData()
+        {
+            return m_InstanceData;
         }
     }
 }

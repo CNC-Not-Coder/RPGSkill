@@ -5,7 +5,31 @@
  * */
 namespace RPGSkill
 {
-    class EffectComponent : SkillComponent
+    public class EffectComponent : SkillComponent
     {
+        public override void Init(int id)
+        {
+            base.Init(id);
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+        }
+
+        public override void Stop()
+        {
+            base.Stop();
+        }
+
+        public override bool Tick(long deltaTime, long curTime, InstanceData instanceData)
+        {
+            return base.Tick(deltaTime, curTime, instanceData);
+        }
     }
 }
