@@ -52,38 +52,38 @@ namespace RPGSkill
 
             //TODO:区分服务器和客户端，这个方法要摘出去
             //if(IsServer)...
-            int ct = m_RuleIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_RuleIds[i] == -1) break;
-                RuleComponent rc = new RuleComponent();
-                rc.Init(m_RuleIds[i]);
-                AddComponent(rc);
-            }
-            ct = m_EffectIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_EffectIds[i] == -1) break;
-                EffectComponent ec = new EffectComponent();
-                ec.Init(m_EffectIds[i]);
-                AddComponent(ec);
-            }
-            ct = m_SoundIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_SoundIds[i] == -1) break;
-                SoundComponent sc = new SoundComponent();
-                sc.Init(m_SoundIds[i]);
-                AddComponent(sc);
-            }
-            ct = m_AnimIds.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                if (m_AnimIds[i] == -1) break;
-                AnimationComponent ac = new AnimationComponent();
-                ac.Init(m_AnimIds[i]);
-                AddComponent(ac);
-            }
+            //int ct = m_RuleIds.Count;
+            //for (int i = 0; i < ct; i++)
+            //{
+            //    if (m_RuleIds[i] == -1) break;
+            //    RuleComponent rc = new RuleComponent();
+            //    rc.Init(m_RuleIds[i]);
+            //    AddComponent(rc);
+            //}
+            //ct = m_EffectIds.Count;
+            //for (int i = 0; i < ct; i++)
+            //{
+            //    if (m_EffectIds[i] == -1) break;
+            //    EffectComponent ec = new EffectComponent();
+            //    ec.Init(m_EffectIds[i]);
+            //    AddComponent(ec);
+            //}
+            //ct = m_SoundIds.Count;
+            //for (int i = 0; i < ct; i++)
+            //{
+            //    if (m_SoundIds[i] == -1) break;
+            //    SoundComponent sc = new SoundComponent();
+            //    sc.Init(m_SoundIds[i]);
+            //    AddComponent(sc);
+            //}
+            //ct = m_AnimIds.Count;
+            //for (int i = 0; i < ct; i++)
+            //{
+            //    if (m_AnimIds[i] == -1) break;
+            //    AnimationComponent ac = new AnimationComponent();
+            //    ac.Init(m_AnimIds[i]);
+            //    AddComponent(ac);
+            //}
 
             return true;
         }
