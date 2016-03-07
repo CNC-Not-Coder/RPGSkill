@@ -22,14 +22,14 @@ namespace DataTableSpace
         public void Load(MyDataRow row)
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
-			StartTime = DataParser.Parse<int>(row, "StartTime", -1);
+			StartTime = DataParser.Parse<int>(row, "StartTime", 0);
 			ClipName = DataParser.Parse<string>(row, "ClipName", string.Empty);
-			Layer = DataParser.Parse<int>(row, "Layer", -1);
-			Speed = DataParser.Parse<float>(row, "Speed", 0f);
-			Weight = DataParser.Parse<float>(row, "Weight", 0f);
-			WrapMode = DataParser.Parse<string>(row, "WrapMode", string.Empty);
-			BlendMode = DataParser.Parse<string>(row, "BlendMode", string.Empty);
-			CrossTime = DataParser.Parse<float>(row, "CrossTime", 0f);
+			Layer = DataParser.Parse<int>(row, "Layer", 0);
+			Speed = DataParser.Parse<float>(row, "Speed", 1);
+			Weight = DataParser.Parse<float>(row, "Weight", 1);
+			WrapMode = DataParser.Parse<string>(row, "WrapMode", "Default");
+			BlendMode = DataParser.Parse<string>(row, "BlendMode", "Blend");
+			CrossTime = DataParser.Parse<float>(row, "CrossTime", 0.2f);
 			
         }
         public int GetId()
@@ -53,7 +53,7 @@ namespace DataTableSpace
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
 			LogicId = DataParser.Parse<int>(row, "LogicId", -1);
-			Delay = DataParser.Parse<int>(row, "Delay", -1);
+			Delay = DataParser.Parse<int>(row, "Delay", 0);
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			AnimationIdList = DataParser.ParseList<int>(row, "AnimationId", -1);
 			SoundIdList = DataParser.ParseList<int>(row, "SoundId", -1);
@@ -85,17 +85,17 @@ namespace DataTableSpace
         public void Load(MyDataRow row)
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
-			StartTime = DataParser.Parse<int>(row, "StartTime", -1);
-			DeleteTime = DataParser.Parse<int>(row, "DeleteTime", -1);
+			StartTime = DataParser.Parse<int>(row, "StartTime", 0);
+			DeleteTime = DataParser.Parse<int>(row, "DeleteTime", 0);
 			Resource = DataParser.Parse<string>(row, "Resource", string.Empty);
 			Bone = DataParser.Parse<string>(row, "Bone", string.Empty);
-			IsAttach = DataParser.Parse<bool>(row, "IsAttach", false);
-			Position = DataParser.Parse<string>(row, "Position", string.Empty);
-			Rotation = DataParser.Parse<string>(row, "Rotation", string.Empty);
-			Scale = DataParser.Parse<string>(row, "Scale", string.Empty);
-			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", false);
+			IsAttach = DataParser.Parse<bool>(row, "IsAttach", true);
+			Position = DataParser.Parse<string>(row, "Position", "0,0,0");
+			Rotation = DataParser.Parse<string>(row, "Rotation", "0,0,0");
+			Scale = DataParser.Parse<string>(row, "Scale", "1,1,1");
+			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", true);
 			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
-			BulletTime = DataParser.Parse<int>(row, "BulletTime", -1);
+			BulletTime = DataParser.Parse<int>(row, "BulletTime", 0);
 			
         }
         public int GetId()
@@ -118,7 +118,7 @@ namespace DataTableSpace
             Id = DataParser.Parse<int>(row, "Id", -1);
 			LogicId = DataParser.Parse<int>(row, "LogicId", -1);
 			BufferIdList = DataParser.ParseList<int>(row, "BufferId", -1);
-			StartTime = DataParser.Parse<int>(row, "StartTime", -1);
+			StartTime = DataParser.Parse<int>(row, "StartTime", 0);
 			ParamList = DataParser.ParseList<string>(row, "Param", string.Empty);
 			
         }
@@ -141,7 +141,7 @@ namespace DataTableSpace
         public void Load(MyDataRow row)
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
-			CheckRange = DataParser.Parse<float>(row, "CheckRange", 0f);
+			CheckRange = DataParser.Parse<float>(row, "CheckRange", -1);
 			RuleIdList = DataParser.ParseList<int>(row, "RuleId", -1);
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			SoundIdList = DataParser.ParseList<int>(row, "SoundId", -1);
@@ -164,7 +164,7 @@ namespace DataTableSpace
         public void Load(MyDataRow row)
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
-			StartTime = DataParser.Parse<int>(row, "StartTime", -1);
+			StartTime = DataParser.Parse<int>(row, "StartTime", 0);
 			Resource = DataParser.Parse<string>(row, "Resource", string.Empty);
 			
         }

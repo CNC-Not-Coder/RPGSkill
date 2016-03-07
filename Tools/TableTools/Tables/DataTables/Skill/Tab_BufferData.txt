@@ -1,3 +1,4 @@
 Id	LogicId	Delay	EffectId0	AnimationId0	SoundId0	Param0	Param1
 #INT	INT	INT	INT	INT	INT	STRING	STRING
+#	-1	0	-1	-1	-1		
 #id	逻辑Id，对应到代码	延时生效ms（不影响特效动画声音等表现）	特效（可以有多个）	动画（可以有多个）	声音（可以有多个）	与逻辑相关的参数	
