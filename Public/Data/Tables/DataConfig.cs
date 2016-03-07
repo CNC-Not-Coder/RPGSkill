@@ -18,6 +18,7 @@ namespace DataTableSpace
 		public string WrapMode;
 		public string BlendMode;
 		public float CrossTime;
+		public bool UseOnTarget;
 		
         public void Load(MyDataRow row)
         {
@@ -30,6 +31,7 @@ namespace DataTableSpace
 			WrapMode = DataParser.Parse<string>(row, "WrapMode", "Default");
 			BlendMode = DataParser.Parse<string>(row, "BlendMode", "Blend");
 			CrossTime = DataParser.Parse<float>(row, "CrossTime", 0.2f);
+			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", true);
 			
         }
         public int GetId()

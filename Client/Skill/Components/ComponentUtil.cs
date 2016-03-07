@@ -30,5 +30,17 @@ namespace RPGSkill
         {
             throw new NotImplementedException();
         }
+        public static WrapMode StringToWrapMode(string str)
+        {
+            WrapMode mode = WrapMode.Default;
+            Enum.TryParse(str, true, out mode);
+            return mode;
+        }
+        public static AnimationBlendMode StringToBlendMode(string str)
+        {
+            AnimationBlendMode mode = AnimationBlendMode.Blend;
+            Enum.TryParse(str, true, out mode);
+            return mode;
+        }
     }
 }
