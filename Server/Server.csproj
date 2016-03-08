@@ -50,6 +50,7 @@
     <Compile Include="Skill\Components\BufferLogic\BufferData.cs" />
     <Compile Include="Skill\Components\BufferLogic\BufferLogic.cs" />
     <Compile Include="Skill\Components\BufferLogic\BufferLogicManager.cs" />
+    <Compile Include="Skill\Components\MoveComponent.cs" />
     <Compile Include="Skill\Components\RuleComponent.cs" />
     <Compile Include="Skill\Components\RuleLogic\RuleData.cs" />
     <Compile Include="Skill\Components\RuleLogic\RuleLogic.cs" />

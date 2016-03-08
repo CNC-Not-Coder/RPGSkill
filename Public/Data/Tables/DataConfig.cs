@@ -49,6 +49,7 @@ namespace DataTableSpace
 		public List<int> EffectIdList;
 		public List<int> AnimationIdList;
 		public List<int> SoundIdList;
+		public List<int> MoveIdList;
 		public List<string> ParamList;
 		
         public void Load(MyDataRow row)
@@ -59,6 +60,7 @@ namespace DataTableSpace
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			AnimationIdList = DataParser.ParseList<int>(row, "AnimationId", -1);
 			SoundIdList = DataParser.ParseList<int>(row, "SoundId", -1);
+			MoveIdList = DataParser.ParseList<int>(row, "MoveId", -1);
 			ParamList = DataParser.ParseList<string>(row, "Param", string.Empty);
 			
         }
@@ -107,6 +109,36 @@ namespace DataTableSpace
     }
     public class Tab_EffectDataProvider : DataInstance<Tab_EffectData> { }
     
+    public class Tab_MoveData : IDataUnit
+    {
+        public int Id;
+		public int StartTime;
+		public float Distance;
+		public int MoveTime;
+		public int CurveType;
+		public float Direction;
+		public bool IsRelativeSender;
+		public bool UseOnTarget;
+		
+        public void Load(MyDataRow row)
+        {
+            Id = DataParser.Parse<int>(row, "Id", -1);
+			StartTime = DataParser.Parse<int>(row, "StartTime", 0);
+			Distance = DataParser.Parse<float>(row, "Distance", 0);
+			MoveTime = DataParser.Parse<int>(row, "MoveTime", 0);
+			CurveType = DataParser.Parse<int>(row, "CurveType", 0);
+			Direction = DataParser.Parse<float>(row, "Direction", 0);
+			IsRelativeSender = DataParser.Parse<bool>(row, "IsRelativeSender", true);
+			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", true);
+			
+        }
+        public int GetId()
+        {
+            return Id;
+        }
+    }
+    public class Tab_MoveDataProvider : DataInstance<Tab_MoveData> { }
+    
     public class Tab_RuleData : IDataUnit
     {
         public int Id;
@@ -139,6 +171,7 @@ namespace DataTableSpace
 		public List<int> EffectIdList;
 		public List<int> SoundIdList;
 		public List<int> AnimationIdList;
+		public List<int> MoveIdList;
 		
         public void Load(MyDataRow row)
         {
@@ -148,6 +181,7 @@ namespace DataTableSpace
 			EffectIdList = DataParser.ParseList<int>(row, "EffectId", -1);
 			SoundIdList = DataParser.ParseList<int>(row, "SoundId", -1);
 			AnimationIdList = DataParser.ParseList<int>(row, "AnimationId", -1);
+			MoveIdList = DataParser.ParseList<int>(row, "MoveId", -1);
 			
         }
         public int GetId()
@@ -184,6 +218,7 @@ namespace DataTableSpace
             LoadData(Tab_AnimationDataProvider.Instance, "Skill/Tab_AnimationData.txt");
 			LoadData(Tab_BufferDataProvider.Instance, "Skill/Tab_BufferData.txt");
 			LoadData(Tab_EffectDataProvider.Instance, "Skill/Tab_EffectData.txt");
+			LoadData(Tab_MoveDataProvider.Instance, "Skill/Tab_MoveData.txt");
 			LoadData(Tab_RuleDataProvider.Instance, "Skill/Tab_RuleData.txt");
 			LoadData(Tab_SkillDataProvider.Instance, "Skill/Tab_SkillData.txt");
 			LoadData(Tab_SoundDataProvider.Instance, "Skill/Tab_SoundData.txt");

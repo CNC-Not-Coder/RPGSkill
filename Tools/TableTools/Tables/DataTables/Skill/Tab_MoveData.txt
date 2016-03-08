@@ -1,0 +1,3 @@
+Id	StartTime	Distance	MoveTime	CurveType	Direction	IsRelativeSender	UseOnTarget
+#INT	INT	FLOAT	INT	INT	FLOAT	BOOL	BOOL
+#	0	0	0	0	0	True	True

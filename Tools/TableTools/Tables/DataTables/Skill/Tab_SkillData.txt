@@ -1,4 +1,4 @@
-Id	CheckRange	RuleId0	EffectId0	SoundId0	AnimationId0
-#INT	FLOAT	INT	INT	INT	INT
-#-1	-1	-1	-1	-1	-1
-#Id	检测施法距离，检测失败则不释放，-1表示不检测	伤害判定（可以有多个）	特效（可以有多个）	声音（可以有多个）	动画（可以有多个）
+Id	CheckRange	RuleId0	EffectId0	SoundId0	AnimationId0	MoveId0
+#INT	FLOAT	INT	INT	INT	INT	INT
+#-1	-1	-1	-1	-1	-1	-1
+#Id	检测施法距离，检测失败则不释放，-1表示不检测	伤害判定（可以有多个）	特效（可以有多个）	声音（可以有多个）	动画（可以有多个）	位移（可以有多个）
