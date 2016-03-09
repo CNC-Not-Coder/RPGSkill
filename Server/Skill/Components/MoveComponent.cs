@@ -18,6 +18,10 @@ namespace RPGSkill
         private float m_Direction = 0f;
         private bool m_IsRelativeSender = true;
         private bool m_UseOnTarget = true;
+
+        private bool m_FirstAdd = false;
+        private float m_MoveSpeed = 0f;
+        private Vector2 m_MoveDir = Vector2.forward;
         public override void Init(int id)
         {
             Tab_MoveData data = Tab_MoveDataProvider.Instance.GetDataById(id);
@@ -33,6 +37,20 @@ namespace RPGSkill
             m_IsRelativeSender = data.IsRelativeSender;
             m_UseOnTarget = data.UseOnTarget;
         }
+        public override void Start()
+        {
+            m_FirstAdd = true;
+            m_MoveSpeed = 0f;
+            m_MoveDir = Vector2.forward;
+            base.Start();
+        }
+        public override void Reset()
+        {
+            m_FirstAdd = false;
+            m_MoveSpeed = 0f;
+            m_MoveDir = Vector2.forward;
+            base.Reset();
+        }
 
         public override bool Tick(long deltaTime, long curTime, InstanceData instanceData)
         {
@@ -40,17 +58,33 @@ namespace RPGSkill
                 return true;
             if (curTime > startTime + m_MoveTime)
                 return false;
-
-            float fDistance = 0f;
-            float fDirection = 0f;
-            if(m_IsLockTarget)
+            if(m_FirstAdd)
             {
-                
+                m_FirstAdd = false;
+                float fDistance = 0f;
+                float fDirection = 0f;
+                if (m_IsLockTarget)
+                {
+                    if (instanceData.TargetId == -1)
+                        return false;
+                    fDistance = ComponentUtil.GetDistance(instanceData.SenderId, instanceData.TargetId);
+                    
+                }
+                else
+                {
+                    fDistance = m_Distance;
+                    fDirection = m_Direction;
+                }
+                m_MoveSpeed = fDistance / m_MoveTime;//per ms
             }
-            else
+            if(m_MoveSpeed > 0)
             {
-                fDistance = m_Distance;
-                fDirection = m_Direction;
+                if(m_UseOnTarget)
+                {
+                    Vector2 now = ComponentUtil.GetObjPosition(instanceData.TargetId);
+
+                }
+                // ComponentUtil.SetObjPosition(instanceData.TargetId, )
             }
 
 
