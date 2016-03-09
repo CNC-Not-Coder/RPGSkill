@@ -1,3 +1,4 @@
-Id	StartTime	Distance	MoveTime	CurveType	Direction	IsRelativeSender	UseOnTarget
-#INT	INT	FLOAT	INT	INT	FLOAT	BOOL	BOOL
-#	0	0	0	0	0	True	True
+Id	StartTime	IsLockTarget	Distance	MoveTime	CurveType	Direction	IsRelativeSender	UseOnTarget
+#INT	INT	BOOL	FLOAT	INT	INT	FLOAT	BOOL	BOOL
+#	0	True	0	0	0	0	True	True
+#Id	开始时间	是否锁定目标，如果不是锁定目标的运动则需要指定距离	距离	总时长	曲线类型（直线，抛物线等）	方向（单位是角度，往左是负，往右是正）	这个角度是相对于谁来讲的	是否应用到目标上

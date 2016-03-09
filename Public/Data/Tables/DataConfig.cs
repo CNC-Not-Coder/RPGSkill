@@ -113,6 +113,7 @@ namespace DataTableSpace
     {
         public int Id;
 		public int StartTime;
+		public bool IsLockTarget;
 		public float Distance;
 		public int MoveTime;
 		public int CurveType;
@@ -124,6 +125,7 @@ namespace DataTableSpace
         {
             Id = DataParser.Parse<int>(row, "Id", -1);
 			StartTime = DataParser.Parse<int>(row, "StartTime", 0);
+			IsLockTarget = DataParser.Parse<bool>(row, "IsLockTarget", true);
 			Distance = DataParser.Parse<float>(row, "Distance", 0);
 			MoveTime = DataParser.Parse<int>(row, "MoveTime", 0);
 			CurveType = DataParser.Parse<int>(row, "CurveType", 0);

@@ -11,6 +11,7 @@ namespace RPGSkill
             Parabolic = 1, //抛物线，固定曲率的
         }
         private int m_Id = -1;
+        private bool m_IsLockTarget = true;
         private float m_Distance = 0f;
         private int m_MoveTime = 0;
         private CurveType m_CurType = CurveType.Straight;
@@ -24,6 +25,7 @@ namespace RPGSkill
                 return;
             m_Id = id;
             startTime = data.StartTime;
+            m_IsLockTarget = data.IsLockTarget;
             m_Distance = data.Distance;
             m_MoveTime = data.MoveTime;
             m_CurType = (CurveType)data.CurveType;
@@ -39,6 +41,17 @@ namespace RPGSkill
             if (curTime > startTime + m_MoveTime)
                 return false;
 
+            float fDistance = 0f;
+            float fDirection = 0f;
+            if(m_IsLockTarget)
+            {
+                
+            }
+            else
+            {
+                fDistance = m_Distance;
+                fDirection = m_Direction;
+            }
 
 
             return true;
