@@ -54,6 +54,7 @@
     <Compile Include="Skill\Components\AnimationComponent.cs" />
     <Compile Include="Skill\Components\ComponentUtil.cs" />
     <Compile Include="Skill\Components\EffectComponent.cs" />
+    <Compile Include="Skill\Components\MoveComponent.cs" />
     <Compile Include="Skill\Components\SoundComponent.cs" />
   </ItemGroup>
   <ItemGroup>

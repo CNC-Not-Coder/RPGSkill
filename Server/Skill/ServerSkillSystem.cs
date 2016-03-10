@@ -96,6 +96,7 @@ namespace RPGSkill
             List<int> RuleIds = new List<int>(data.RuleIdList);
             List<SkillComponent> list = new List<SkillComponent>();
             list.AddRange(LoadSkillComponent<RuleComponent>(data.RuleIdList));
+            list.AddRange(LoadSkillComponent<MoveComponent>(data.MoveIdList));
 
             SkillInstance instance = new SkillInstance();
             if(instance.Init(skillId, list))

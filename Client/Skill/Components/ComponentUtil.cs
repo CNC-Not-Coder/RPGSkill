@@ -42,5 +42,20 @@ namespace RPGSkill
             Enum.TryParse(str, true, out mode);
             return mode;
         }
+
+        internal static Vector3 GetObjPosition(int objId)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static float GetObjDir(int objId)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void SetObjPosition(int objId, Vector3 now)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

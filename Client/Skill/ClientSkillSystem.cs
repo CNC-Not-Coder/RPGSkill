@@ -95,6 +95,7 @@ namespace RPGSkill
             list.AddRange(LoadSkillComponent<EffectComponent>(data.EffectIdList));
             list.AddRange(LoadSkillComponent<SoundComponent>(data.SoundIdList));
             list.AddRange(LoadSkillComponent<AnimationComponent>(data.AnimationIdList));
+            list.AddRange(LoadSkillComponent<MoveComponent>(data.MoveIdList));
 
             SkillInstance instance = new SkillInstance();
             if (instance.Init(skillId, list))

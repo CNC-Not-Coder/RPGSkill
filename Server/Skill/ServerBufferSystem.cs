@@ -125,6 +125,7 @@ namespace RPGSkill
             component.Init(bufferId);
             List<SkillComponent> list = new List<SkillComponent>();
             list.Add(component);
+            list.AddRange(LoadSkillComponent<MoveComponent>(data.MoveIdList));
 
             BufferInstance instance = new BufferInstance();
             if (instance.Init(bufferId, list))
@@ -132,6 +133,19 @@ namespace RPGSkill
                 return instance;
             }
             return null;
+        }
+        protected List<T> LoadSkillComponent<T>(List<int> ids) where T : SkillComponent, new()
+        {
+            List<T> list = new List<T>();
+            int ct = ids.Count;
+            for (int i = 0; i < ct; i++)
+            {
+                T component = new T();
+                component.Init(ids[i]);
+                list.Add(component);
+            }
+
+            return list;
         }
     }
 }
