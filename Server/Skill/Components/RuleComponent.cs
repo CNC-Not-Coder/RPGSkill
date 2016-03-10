@@ -67,7 +67,7 @@ namespace RPGSkill
                 int len = Buffers.Count;
                 for (int j = 0; j < len; j++)
                 {
-                    ServerBufferSystem.Instance.SendBufferToTarget(Buffers[j], instanceData.InstanceId, SenderId, TargetId);
+                    ComponentUtil.SendBufferToTarget(Buffers[j], instanceData.InstanceId, SenderId, TargetId);
                 }
             }
             

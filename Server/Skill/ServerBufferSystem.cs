@@ -4,17 +4,14 @@ using DataTableSpace;
 using System.Collections.Generic;
 namespace RPGSkill
 {
+    /// <summary>
+    /// 一个Scene一个BufferSystem，所以这里没有单例
+    /// </summary>
     public class ServerBufferSystem
     {
         private Dictionary<int, List<BufferInstance>> m_Buffers = new Dictionary<int, List<BufferInstance>>();
         private Dictionary<int, List<BufferInstance>> m_UnActiveBuffers = new Dictionary<int, List<BufferInstance>>();
 
-        private static ServerBufferSystem s_Instance = new ServerBufferSystem();
-
-        public static ServerBufferSystem Instance
-        {
-            get { return s_Instance; }
-        }
         public void SendBufferToTarget(int bufferId, int skillId, int sender, int target)
         {
             //这个暂时不做

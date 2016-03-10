@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 //服务器的组件帮助类
 namespace RPGSkill
 {
@@ -111,6 +112,12 @@ namespace RPGSkill
         }
         public static float GetObjDir(int objId)
         {
+            throw new NotImplementedException();
+        }
+
+        public static List<BufferData> GetBufferDatasByObjId(int objId)
+        {
+            //需要根据objId获得Scene对象，然后获得ServerBufferSystem
             throw new NotImplementedException();
         }
 

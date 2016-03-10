@@ -50,7 +50,7 @@ namespace RPGSkill
                 m_BufferData.SkillId = instanceData.SkillId;
                 m_BufferData.CustomData.Clear();
                 //获得Target上的所有BufferData
-                List<BufferData> buffers = ServerBufferSystem.Instance.GetBufferDatasByObjId(m_BufferData.TargetId);
+                List<BufferData> buffers = ComponentUtil.GetBufferDatasByObjId(m_BufferData.TargetId);
                 if(buffers != null)
                 {
                     int ct = buffers.Count;

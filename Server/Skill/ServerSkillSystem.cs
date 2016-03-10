@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace RPGSkill
 {
     /// <summary>
-    /// 线程不安全
+    /// 线程不安全，一个Scene一个SkillSystem，没有单例
     /// </summary>
     public class ServerSkillSystem
     {
