@@ -16,6 +16,7 @@ namespace RPGSkill
         {
             RegisterRule(RuleLogicType.LockTarget, new LockTargetRule());
             RegisterRule(RuleLogicType.AreaDetect, new AreaDetectRule());
+            RegisterRule(RuleLogicType.RectDetect, new  RectDetectRule());
         }
         protected void RegisterRule(RuleLogicType logicType, IRuleLogic logic)
         {

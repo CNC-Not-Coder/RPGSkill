@@ -120,6 +120,20 @@ namespace RPGSkill
             //需要根据objId获得Scene对象，然后获得ServerBufferSystem
             throw new NotImplementedException();
         }
+        private static char[] Seperator = { ' ', '|', ',' };
+        public static Vector2 StringToVector2(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return Vector2.zero;
+            string[] ps = str.Split(Seperator, StringSplitOptions.RemoveEmptyEntries);
+            if (ps != null && ps.Length == 2)
+            {
+                float x = Convert.ToSingle(ps[0]);
+                float y = Convert.ToSingle(ps[1]);
+                return new Vector2(x, y);
+            }
+            return Vector2.zero;
+        }
 
         public const float Deg2Rad = 0.01745329f;
         public const float Rad2Deg = 57.29578f;
