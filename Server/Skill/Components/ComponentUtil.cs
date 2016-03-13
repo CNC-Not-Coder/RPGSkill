@@ -134,6 +134,10 @@ namespace RPGSkill
             }
             return Vector2.zero;
         }
+        public static List<int> GetObjectsByRadius(Vector2 pos, float range)
+        {
+            throw new NotImplementedException();
+        }
 
         public const float Deg2Rad = 0.01745329f;
         public const float Rad2Deg = 57.29578f;
