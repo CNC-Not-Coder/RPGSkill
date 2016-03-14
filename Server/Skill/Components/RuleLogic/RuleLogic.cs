@@ -25,13 +25,15 @@ namespace RPGSkill
     {
         public override void ParseData(RuleData data, List<string> args)
         {
-            if(args.Count < 4)
+            if(args.Count < 5)
                 return;
             AreaDetectData param = new AreaDetectData();
-            param.Range = Convert.ToSingle(args[0]);
-            param.Offset = ComponentUtil.StringToVector2(args[1]);
-            param.DetectCount = Convert.ToInt32(args[2]);
-            param.DetectInterval = Convert.ToInt32(args[3]);
+            param.DetectCount = Convert.ToInt32(args[0]);
+            param.DetectInterval = Convert.ToInt32(args[1]);
+
+            param.Range = Convert.ToSingle(args[2]);
+            param.Offset = ComponentUtil.StringToVector2(args[3]);
+            param.Rotation = Convert.ToSingle(args[4]);
 
             data.CustomData.AddData(param);
         }
@@ -40,6 +42,7 @@ namespace RPGSkill
             AreaDetectData area = data.CustomData.GetData<AreaDetectData>();
             if (area == null)
                 return new List<int>();
+            //Vector2 pos = component.TargetId
         }
     }
     public class RectDetectRule : IRuleLogic
@@ -49,12 +52,13 @@ namespace RPGSkill
             if (args.Count < 6)
                 return;
             RectDetectData param = new RectDetectData();
-            param.Length = Convert.ToSingle(args[0]);
-            param.Width = Convert.ToSingle(args[1]);
-            param.Offset = ComponentUtil.StringToVector2(args[2]);
-            param.Rotation = Convert.ToSingle(args[3]);
-            param.DetectCount = Convert.ToInt32(args[4]);
-            param.DetectInterval = Convert.ToInt32(args[5]);
+            param.DetectCount = Convert.ToInt32(args[0]);
+            param.DetectInterval = Convert.ToInt32(args[1]);
+
+            param.Length = Convert.ToSingle(args[2]);
+            param.Width = Convert.ToSingle(args[3]);
+            param.Offset = ComponentUtil.StringToVector2(args[4]);
+            param.Rotation = Convert.ToSingle(args[5]);
 
             data.CustomData.AddData(param);
         }
