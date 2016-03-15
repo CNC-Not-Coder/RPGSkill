@@ -18,6 +18,10 @@ namespace RPGSkill
         public float Range = 0f;
         public Vector2 Offset = Vector2.zero;//以Sender朝向为基准的偏移
         public float Rotation = 0f;//以Sender朝向为基准的旋转
+
+        //临时数据
+        public long NextDetectTime = 0;
+        public int LeftDetectCount = 0;
     }
 
     public class RectDetectData
@@ -29,5 +33,9 @@ namespace RPGSkill
         public float Width = 0f;
         public Vector2 Offset = Vector2.zero;//以Sender朝向为基准的偏移
         public float Rotation = 0f;//以Sender朝向为基准的旋转
+
+        //临时数据
+        public long NextDetectTime = 0;
+        public int LeftDetectCount = 0;
     }
 }

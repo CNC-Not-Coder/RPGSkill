@@ -41,6 +41,10 @@ namespace RPGSkill
         {
             IsFirstAdd = false;
             m_RuleData.IsActive = false;
+            if(m_Logic != null)
+            {
+                m_Logic.Reset(m_RuleData);
+            }
             base.Reset();
         }
         public override bool Tick(long deltaTime, long curTime, InstanceData instanceData)
@@ -57,7 +61,7 @@ namespace RPGSkill
                 m_RuleData.IsActive = true;
             }
             
-            List<int> targets = m_Logic.GetRuleResult(m_RuleData);
+            List<int> targets = m_Logic.GetRuleResult(m_RuleData, curTime - startTime);
             //给目标发送BUFFER
             int ct = targets.Count;
             for (int i = 0; i < ct; i++)

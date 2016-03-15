@@ -16,7 +16,11 @@ namespace RPGSkill
         {
 
         }
-        public virtual List<int> GetRuleResult(RuleData data)
+        public virtual void Reset(RuleData data)
+        {
+
+        }
+        public virtual List<int> GetRuleResult(RuleData data, long curTime)
         {
             return new List<int>();
         }
@@ -37,13 +41,33 @@ namespace RPGSkill
 
             data.CustomData.AddData(param);
         }
-        public override List<int> GetRuleResult(RuleData data)
+        public override void Reset(RuleData data)
+        {
+            AreaDetectData area = data.CustomData.GetData<AreaDetectData>();
+            if (area == null)
+                return;
+            area.LeftDetectCount = area.DetectCount;
+            area.NextDetectTime = 0;
+        }
+        public override List<int> GetRuleResult(RuleData data, long curTime)
         {
             List<int> result = new List<int>();
             AreaDetectData area = data.CustomData.GetData<AreaDetectData>();
             if (area == null)
                 return result;
-            //Vector2 pos = component.TargetId
+            if(area.LeftDetectCount < 1)
+            {
+                data.IsActive = false;
+                return result;
+            }
+            
+            if(curTime > area.NextDetectTime)
+            {
+                area.NextDetectTime += area.DetectInterval;
+                area.LeftDetectCount--;
+
+                //以技能释放点为中心
+            }
             return result;
         }
     }
@@ -64,7 +88,7 @@ namespace RPGSkill
 
             data.CustomData.AddData(param);
         }
-        public override List<int> GetRuleResult(RuleData data)
+        public override List<int> GetRuleResult(RuleData data, long curTime)
         {
             List<int> result = new List<int>();
             RectDetectData rect = data.CustomData.GetData<RectDetectData>();
@@ -76,7 +100,7 @@ namespace RPGSkill
 
     public class LockTargetRule : IRuleLogic
     {
-        public override List<int> GetRuleResult(RuleData data)
+        public override List<int> GetRuleResult(RuleData data, long curTime)
         {
             List<int> list = new List<int>();
             if (data.Target != -1)
