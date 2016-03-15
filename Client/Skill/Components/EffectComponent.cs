@@ -18,6 +18,7 @@ namespace RPGSkill
         private Vector3 m_Position = Vector3.zero;
         private Vector3 m_Rotation = Vector3.zero;
         private Vector3 m_Scale = Vector3.one;
+        private bool m_UseOnCastPoint = false;
         private bool m_UseOnTarget = true;
         private bool m_IsBullet = false;
         private int m_BulletTime = 0;
@@ -35,6 +36,7 @@ namespace RPGSkill
             m_Position = ComponentUtil.StringToVec3(data.Position);
             m_Rotation = ComponentUtil.StringToVec3(data.Rotation);
             m_Scale = ComponentUtil.StringToVec3(data.Scale);
+            m_UseOnCastPoint = data.UseOnCastPoint;
             m_UseOnTarget = data.UseOnTarget;
             m_IsBullet = data.IsBullet;
             m_BulletTime = data.BulletTime;
@@ -59,19 +61,31 @@ namespace RPGSkill
         {
             if (curTime < startTime)
                 return true;
-            int objId = -1;
-            if(m_UseOnTarget)
-            {
-                objId = instanceData.TargetId;
+            if(m_UseOnCastPoint)
+            {//场景特效，只和传入的释放点有关
+                Vector3 castPoint = new Vector3(instanceData.Cast_x, instanceData.Cast_y, instanceData.Cast_z);
+                GameObject sender = ComponentUtil.GetGameObjectById(instanceData.SenderId);
+                if (sender != null)
+                {
+                    ApplyOnCastPoint(sender, castPoint);
+                }
             }
             else
             {
-                objId = instanceData.SenderId;
-            }
-            GameObject target = ComponentUtil.GetGameObjectById(objId);
-            if (target != null)
-            {
-                ApplyOnObj(target);
+                int objId = -1;
+                if (m_UseOnTarget)
+                {
+                    objId = instanceData.TargetId;
+                }
+                else
+                {
+                    objId = instanceData.SenderId;
+                }
+                GameObject target = ComponentUtil.GetGameObjectById(objId);
+                if (target != null)
+                {
+                    ApplyOnObj(target);
+                }
             }
 
             return false;
@@ -96,6 +110,18 @@ namespace RPGSkill
             {//挂接子弹脚本，给定时间内从当前位置运动到目标的 腰结点
 
             }
+        }
+        protected void ApplyOnCastPoint(GameObject senderObj, Vector3 castPoint)
+        {//此时只有position,rotation,scale参数有效，而且默认以sender的朝向为参考方向
+            GameObject effectObj = ComponentUtil.InstantiateEffect(m_Resource, m_RemainTime);
+            if (effectObj == null)
+                return;
+            effectObj.transform.parent = senderObj.transform;
+            Vector3 localOffset = senderObj.transform.InverseTransformPoint(castPoint);
+            effectObj.transform.localPosition = localOffset + m_Position;
+            effectObj.transform.localRotation = Quaternion.Euler(m_Rotation);
+            effectObj.transform.localScale = m_Scale;
+            effectObj.transform.parent = null;
         }
     }
 }

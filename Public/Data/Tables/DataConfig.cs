@@ -82,6 +82,7 @@ namespace DataTableSpace
 		public string Position;
 		public string Rotation;
 		public string Scale;
+		public bool UseOnCastPoint;
 		public bool UseOnTarget;
 		public bool IsBullet;
 		public int BulletTime;
@@ -97,6 +98,7 @@ namespace DataTableSpace
 			Position = DataParser.Parse<string>(row, "Position", "0,0,0");
 			Rotation = DataParser.Parse<string>(row, "Rotation", "0,0,0");
 			Scale = DataParser.Parse<string>(row, "Scale", "1,1,1");
+			UseOnCastPoint = DataParser.Parse<bool>(row, "UseOnCastPoint", false);
 			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", true);
 			IsBullet = DataParser.Parse<bool>(row, "IsBullet", false);
 			BulletTime = DataParser.Parse<int>(row, "BulletTime", 0);
