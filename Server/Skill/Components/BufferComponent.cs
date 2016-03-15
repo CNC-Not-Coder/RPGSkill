@@ -48,7 +48,6 @@ namespace RPGSkill
                 m_BufferData.SenderId = instanceData.SenderId;
                 m_BufferData.TargetId = instanceData.TargetId;
                 m_BufferData.SkillId = instanceData.SkillId;
-                m_BufferData.CustomData.Clear();
                 //获得Target上的所有BufferData
                 List<BufferData> buffers = ComponentUtil.GetBufferDatasByObjId(m_BufferData.TargetId);
                 if(buffers != null)

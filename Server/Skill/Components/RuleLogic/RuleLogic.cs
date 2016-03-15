@@ -39,10 +39,12 @@ namespace RPGSkill
         }
         public override List<int> GetRuleResult(RuleData data)
         {
+            List<int> result = new List<int>();
             AreaDetectData area = data.CustomData.GetData<AreaDetectData>();
             if (area == null)
-                return new List<int>();
+                return result;
             //Vector2 pos = component.TargetId
+            return result;
         }
     }
     public class RectDetectRule : IRuleLogic
@@ -64,10 +66,11 @@ namespace RPGSkill
         }
         public override List<int> GetRuleResult(RuleData data)
         {
+            List<int> result = new List<int>();
             RectDetectData rect = data.CustomData.GetData<RectDetectData>();
             if (rect == null)
-                return new List<int>();
-
+                return result;
+            return result;
         }
     }
 

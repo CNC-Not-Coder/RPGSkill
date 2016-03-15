@@ -9,7 +9,7 @@ namespace RPGSkill
     {
         private List<SkillInstance> m_ActiveSkills = new List<SkillInstance>();
         private Dictionary<int, List<SkillInstance>> m_UnActiveSkills = new Dictionary<int, List<SkillInstance>>();
-        public void StartSkill(int skillId, int sender, int target)
+        public void StartSkill(int skillId, int sender, int target, float cast_x, float cast_y, float cast_z)
         {
             if (skillId == -1 || sender == -1)
                 return;
@@ -19,7 +19,7 @@ namespace RPGSkill
             {
                 m_ActiveSkills.Add(instance);
                 instance.Reset();
-                instance.Start(sender, target);
+                instance.Start(sender, target, cast_x, cast_y, cast_z);
             }
         }
 

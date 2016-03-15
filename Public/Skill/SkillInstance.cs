@@ -57,7 +57,7 @@ namespace RPGSkill
         {
             return true;
         }
-        public void Start(int sender, int target)
+        public void Start(int sender, int target, float cast_x, float cast_y, float cast_z)
         {
             Reset();
             m_IsActive = true;
@@ -66,6 +66,9 @@ namespace RPGSkill
             m_InstanceData.SenderId = sender;
             m_InstanceData.TargetId = target;
             m_InstanceData.InstanceId = m_Id;
+            m_InstanceData.Cast_x = cast_x;
+            m_InstanceData.Cast_y = cast_y;
+            m_InstanceData.Cast_z = cast_z;
             m_InstanceData.SkillId = m_Id;
 
             if (m_Components != null)

@@ -8,6 +8,9 @@ namespace RPGSkill
         public int SenderId = -1;
         public int TargetId = -1;
         public int SkillId = -1;
+        public float Cast_x = 0f;
+        public float Cast_y = 0f;
+        public float Cast_z = 0f;
         public TypedDataCollection CustomData = new TypedDataCollection();
     }
     public class SkillComponent
