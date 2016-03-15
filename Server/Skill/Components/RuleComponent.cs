@@ -17,9 +17,6 @@ namespace RPGSkill
         private IRuleLogic m_Logic = null;
         private RuleData m_RuleData = new RuleData();
 
-        public int SenderId = -1;
-        public int TargetId = -1;
-
         private bool IsFirstAdd = false;
         
         public override void Init(int id)
@@ -43,6 +40,7 @@ namespace RPGSkill
         public override void Reset()
         {
             IsFirstAdd = false;
+            m_RuleData.IsActive = false;
             base.Reset();
         }
         public override bool Tick(long deltaTime, long curTime, InstanceData instanceData)
@@ -54,12 +52,12 @@ namespace RPGSkill
             if(IsFirstAdd)
             {
                 IsFirstAdd = false;
-                SenderId = instanceData.SenderId;
-                TargetId = instanceData.TargetId;
-                m_RuleData.CustomData.Clear();
+                m_RuleData.Sender = instanceData.SenderId;
+                m_RuleData.Target = instanceData.TargetId;
+                m_RuleData.IsActive = true;
             }
             
-            List<int> targets = m_Logic.GetRuleResult(m_RuleData, this);
+            List<int> targets = m_Logic.GetRuleResult(m_RuleData);
             //给目标发送BUFFER
             int ct = targets.Count;
             for (int i = 0; i < ct; i++)
@@ -67,15 +65,16 @@ namespace RPGSkill
                 int len = Buffers.Count;
                 for (int j = 0; j < len; j++)
                 {
-                    ComponentUtil.SendBufferToTarget(Buffers[j], instanceData.InstanceId, SenderId, TargetId);
+                    ComponentUtil.SendBufferToTarget(Buffers[j], instanceData.InstanceId, instanceData.SenderId, instanceData.TargetId);
                 }
             }
             
-            return false;
+            return m_RuleData.IsActive;
         }
         public override void Start()
         {
             IsFirstAdd = true;
+            m_RuleData.IsActive = true;
             base.Start();
         }
         public override void Stop()

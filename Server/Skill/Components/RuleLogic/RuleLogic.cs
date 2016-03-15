@@ -16,7 +16,7 @@ namespace RPGSkill
         {
 
         }
-        public virtual List<int> GetRuleResult(RuleData data, RuleComponent component)
+        public virtual List<int> GetRuleResult(RuleData data)
         {
             return new List<int>();
         }
@@ -37,7 +37,7 @@ namespace RPGSkill
 
             data.CustomData.AddData(param);
         }
-        public override List<int> GetRuleResult(RuleData data, RuleComponent component)
+        public override List<int> GetRuleResult(RuleData data)
         {
             AreaDetectData area = data.CustomData.GetData<AreaDetectData>();
             if (area == null)
@@ -62,7 +62,7 @@ namespace RPGSkill
 
             data.CustomData.AddData(param);
         }
-        public override List<int> GetRuleResult(RuleData data, RuleComponent component)
+        public override List<int> GetRuleResult(RuleData data)
         {
             RectDetectData rect = data.CustomData.GetData<RectDetectData>();
             if (rect == null)
@@ -73,10 +73,14 @@ namespace RPGSkill
 
     public class LockTargetRule : IRuleLogic
     {
-        public override List<int> GetRuleResult(RuleData data, RuleComponent component)
+        public override List<int> GetRuleResult(RuleData data)
         {
             List<int> list = new List<int>();
-            list.Add(component.TargetId);
+            if (data.Target != -1)
+            {
+                list.Add(data.Target);
+            }
+            data.IsActive = false;
             return list;
         }
     }
