@@ -19,6 +19,7 @@ namespace RPGSkill
         private float m_Direction = 0f;
         private bool m_IsRelativeSender = true;
         private bool m_UseOnTarget = true;
+        private bool m_AdjustTowardSender = false;
 
         private bool m_FirstAdd = false;
         private Vector3 m_SrcPos = Vector3.zero;
@@ -37,6 +38,7 @@ namespace RPGSkill
             m_Direction = data.Direction;
             m_IsRelativeSender = data.IsRelativeSender;
             m_UseOnTarget = data.UseOnTarget;
+            m_AdjustTowardSender = data.AdjustTowardSender;
         }
         public override void Start()
         {
@@ -62,6 +64,10 @@ namespace RPGSkill
             if (m_FirstAdd)
             {
                 m_FirstAdd = false;
+                if (m_AdjustTowardSender)
+                {
+                    AdjustTowardSender(instanceData.SenderId, instanceData.TargetId);
+                }
                 if (m_IsLockTarget)
                 {//锁定目标移动，这种情况下，配置的距离和方向都无效，应该通过Sender和Target求得
                     if (instanceData.TargetId == -1)
@@ -142,6 +148,11 @@ namespace RPGSkill
             }
 
             return true;
+        }
+        protected void AdjustTowardSender(int senderId, int targetId)
+        {
+            float senderDir = ComponentUtil.GetObjDir(senderId);
+            ComponentUtil.SetObjDir(targetId, senderDir + 180f);
         }
     }
 }

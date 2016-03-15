@@ -114,6 +114,10 @@ namespace RPGSkill
         {
             throw new NotImplementedException();
         }
+        public static void SetObjDir(int objId, float dir)
+        {
+            throw new NotImplementedException();
+        }
 
         public static List<BufferData> GetBufferDatasByObjId(int objId)
         {

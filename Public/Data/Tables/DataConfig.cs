@@ -122,6 +122,7 @@ namespace DataTableSpace
 		public float Direction;
 		public bool IsRelativeSender;
 		public bool UseOnTarget;
+		public bool AdjustTowardSender;
 		
         public void Load(MyDataRow row)
         {
@@ -134,6 +135,7 @@ namespace DataTableSpace
 			Direction = DataParser.Parse<float>(row, "Direction", 0);
 			IsRelativeSender = DataParser.Parse<bool>(row, "IsRelativeSender", true);
 			UseOnTarget = DataParser.Parse<bool>(row, "UseOnTarget", true);
+			AdjustTowardSender = DataParser.Parse<bool>(row, "AdjustTowardSender", false);
 			
         }
         public int GetId()

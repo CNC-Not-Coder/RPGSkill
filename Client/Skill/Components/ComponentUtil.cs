@@ -52,6 +52,10 @@ namespace RPGSkill
         {
             throw new NotImplementedException();
         }
+        public static void SetObjDir(int objId, float dir)
+        {
+            throw new NotImplementedException();
+        }
 
         internal static void SetObjPosition(int objId, Vector3 now)
         {
