@@ -12,17 +12,18 @@ namespace RPGSkill
     {
         private List<SkillInstance> m_ActiveSkills = new List<SkillInstance>();
         private Dictionary<int, List<SkillInstance>> m_UnActiveSkills = new Dictionary<int, List<SkillInstance>>();
-        public void StartSkill(int skillId, int sender, int target, float cast_x, float cast_y, float cast_z)
+        public void StartSkill(int skillId, int sender, int target, Vector3 castPos)
         {
             if (skillId == -1 || sender == -1)
                 return;
-
+            if (CheckCastRange(skillId, sender, target, castPos))
+                return;
             SkillInstance instance = GetUnActiveSkillInstance(skillId);
             if (instance != null)
             {
                 m_ActiveSkills.Add(instance);
                 instance.Reset();
-                instance.Start(sender, target, cast_x, cast_y, cast_z);
+                instance.Start(sender, target, castPos.x, castPos.y, castPos.z);
             }
         }
 
@@ -99,6 +100,7 @@ namespace RPGSkill
             list.AddRange(LoadSkillComponent<MoveComponent>(data.MoveIdList));
 
             SkillInstance instance = new SkillInstance();
+            instance.CheckRange = data.CheckRange;
             if(instance.Init(skillId, list))
             {
                 return instance;
@@ -117,6 +119,41 @@ namespace RPGSkill
             }
             
             return list;
+        }
+        
+        //技能施法距离判定
+        protected bool CheckCastRange(int skillId, int sender, int target, Vector3 castPos)
+        {
+            bool ret = false;
+            Tab_SkillData data = Tab_SkillDataProvider.Instance.GetDataById(skillId);
+            if (data == null)
+                return ret;
+            if(data.CheckRange > 0)
+            {//需要检测施法距离
+                Vector2 senderPos = ComponentUtil.GetObjPosition(sender);
+                Vector2 targetPos = Vector2.zero;
+                if(target != -1)
+                {//锁定目标释放
+                    targetPos = ComponentUtil.GetObjPosition(target);
+                }
+                else
+                {//指定位置释放
+                    targetPos = new Vector2(castPos.x, castPos.z);
+                }
+                if ((senderPos - targetPos).magnitude <= data.CheckRange)
+                {
+                    ret = true;
+                }
+                else
+                {
+                    ret = false;
+                }
+            }
+            else
+            {
+                ret = true;
+            }
+            return ret;
         }
     }
 }

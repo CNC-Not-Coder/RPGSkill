@@ -20,6 +20,8 @@ namespace RPGSkill
         private List<SkillComponent> m_Components = new List<SkillComponent>();
         private InstanceData m_InstanceData = new InstanceData();
 
+        public float CheckRange = -1;
+
         public int SenderId
         {
             get { return m_InstanceData.SenderId; }
