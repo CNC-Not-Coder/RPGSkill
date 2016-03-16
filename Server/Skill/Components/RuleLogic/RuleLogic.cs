@@ -66,7 +66,13 @@ namespace RPGSkill
                 area.NextDetectTime += area.DetectInterval;
                 area.LeftDetectCount--;
 
-                //以技能释放点为中心
+                //以技能释放点为中心，方向以玩家朝向为参考
+                float senderDir = ComponentUtil.GetObjDir(data.Sender);
+                float dirRadius = ComponentUtil.Deg2Rad * (senderDir + area.Rotation);
+                Vector2 moveDir = new Vector2((float)Math.Cos(dirRadius), (float)Math.Sin(dirRadius));
+                Vector2 destPos = data.CastPosition + moveDir + area.Offset;
+                List<int> hitObjs = ComponentUtil.GetObjectsByRadius(destPos, area.Range);
+                result.AddRange(hitObjs);
             }
             return result;
         }
@@ -88,12 +94,49 @@ namespace RPGSkill
 
             data.CustomData.AddData(param);
         }
+        public override void Reset(RuleData data)
+        {
+            RectDetectData rect = data.CustomData.GetData<RectDetectData>();
+            if (rect == null)
+                return;
+            rect.LeftDetectCount = rect.DetectCount;
+            rect.NextDetectTime = 0;
+        }
         public override List<int> GetRuleResult(RuleData data, long curTime)
         {
             List<int> result = new List<int>();
             RectDetectData rect = data.CustomData.GetData<RectDetectData>();
             if (rect == null)
                 return result;
+            if (rect.LeftDetectCount < 1)
+            {
+                data.IsActive = false;
+                return result;
+            }
+
+            if (curTime > rect.NextDetectTime)
+            {
+                rect.NextDetectTime += rect.DetectInterval;
+                rect.LeftDetectCount--;
+
+                //以技能释放点为中心，方向以玩家朝向为参考
+                float senderDir = ComponentUtil.GetObjDir(data.Sender);
+                float dirRadius = ComponentUtil.Deg2Rad * (senderDir + rect.Rotation);
+                Vector2 moveDir = new Vector2((float)Math.Cos(dirRadius), (float)Math.Sin(dirRadius));
+                Vector2 destPos = data.CastPosition + moveDir + rect.Offset;
+
+                //为了计算长方形的Begin和End，需要先计算这两个向量
+                Vector3 toward = new Vector3(moveDir.x, 0, moveDir.y);
+                Vector3 right = Vector3.Cross(toward.normalized, Vector3.up);
+                Vector2 right2 = new Vector2(right.x, right.z);
+
+                Vector2 halfCrossLine = moveDir.normalized * (0.5f * rect.Width) + right2.normalized * (0.5f * rect.Length);
+                Vector2 beg = new Vector2(destPos.x, destPos.y) - halfCrossLine;
+                Vector2 end = new Vector2(destPos.x, destPos.y) + halfCrossLine;
+
+                List<int> hitObjs = ComponentUtil.GetObjectsByRect(destPos, beg, end);
+                result.AddRange(hitObjs);
+            }
             return result;
         }
     }

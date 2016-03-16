@@ -58,6 +58,8 @@ namespace RPGSkill
                 IsFirstAdd = false;
                 m_RuleData.Sender = instanceData.SenderId;
                 m_RuleData.Target = instanceData.TargetId;
+                m_RuleData.SkillId = instanceData.SkillId;
+                m_RuleData.CastPosition = new Vector2(instanceData.Cast_x, instanceData.Cast_z);
                 m_RuleData.IsActive = true;
             }
             
@@ -77,6 +79,7 @@ namespace RPGSkill
         }
         public override void Start()
         {
+            //TODO:这里需要对SkillLevel做判断，如果有改变就需要更新Rule的参数
             IsFirstAdd = true;
             m_RuleData.IsActive = true;
             base.Start();

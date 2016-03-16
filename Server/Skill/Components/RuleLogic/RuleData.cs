@@ -9,6 +9,8 @@ namespace RPGSkill
         public bool IsActive = false;
         public int Sender = -1;
         public int Target = -1;
+        public Vector2 CastPosition = Vector2.zero;
+        public int SkillId = -1;//技能判定会根据技能等级有所调整
     }
     public class AreaDetectData
     {
