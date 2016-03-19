@@ -25,7 +25,7 @@ namespace RPGSkill
             data.IsActive = false;
         }
         public virtual void Tick(BufferData data) { }
-        public virtual bool OnOtherBuffer(BufferData data)
+        public virtual bool OnOtherBuffer(BufferData data, BufferData other)
         {
             bool IsContinue = true;
             return IsContinue;

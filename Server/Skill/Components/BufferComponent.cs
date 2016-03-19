@@ -58,7 +58,7 @@ namespace RPGSkill
                         IBufferLogic logic = BufferLogicManager.Instance.GetBufferLogicByType((BufferLogicType)buffers[i].LogicId);
                         if(logic != null)
                         {
-                            bool isContinue = logic.OnOtherBuffer(buffers[i]);
+                            bool isContinue = logic.OnOtherBuffer(m_BufferData, buffers[i]);
                             if (!isContinue) break;
                         }
                     }

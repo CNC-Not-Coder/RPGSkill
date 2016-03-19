@@ -112,6 +112,7 @@ namespace RPGSkill
         {
             if (!IsActive)
                 return;
+            deltaTime = (long)(deltaTime * m_ExecSpeed + 0.5f);
             m_curTime += deltaTime;
             if (m_Components != null)
             {
