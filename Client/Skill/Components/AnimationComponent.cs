@@ -48,12 +48,12 @@ namespace RPGSkill
             GameObject go = ComponentUtil.GetGameObjectById(objId);
             if(go != null)
             {
-                ApplyOnObj(go);
+                ApplyOnObj(go, instanceData.ExecSpeed);
             }
 
             return false;
         }
-        protected void ApplyOnObj(GameObject go)
+        protected void ApplyOnObj(GameObject go, float speedScale)
         {
             Animation anim = go.GetComponent<Animation>();
             if (anim == null)
@@ -63,7 +63,7 @@ namespace RPGSkill
                 return;
             AnimationState state = anim[m_ClipName];
             state.layer = m_Layer;
-            state.speed = m_Speed;
+            state.speed = m_Speed * speedScale;
             state.weight = m_Weight;
             state.wrapMode = m_WrapMode;
             state.blendMode = m_BlendMode;

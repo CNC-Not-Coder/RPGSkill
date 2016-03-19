@@ -15,7 +15,6 @@ namespace RPGSkill
         private int m_Id = -1;
         private bool m_IsActive = false;
 
-        private float m_ExecSpeed;
         private long m_curTime = 0;
         private List<SkillComponent> m_Components = new List<SkillComponent>();
         private InstanceData m_InstanceData = new InstanceData();
@@ -43,8 +42,8 @@ namespace RPGSkill
 
         public float ExecSpeed
         {
-            get { return m_ExecSpeed; }
-            set { m_ExecSpeed = value; }
+            get { return m_InstanceData.ExecSpeed; }
+            set { m_InstanceData.ExecSpeed = value; }
         }
 
         public bool Init(int skillId, List<SkillComponent> components)
@@ -96,7 +95,6 @@ namespace RPGSkill
         }
         public void Reset()
         {
-            m_ExecSpeed = 1f;
             m_curTime = 0;
             m_IsActive = false;
             m_InstanceData = new InstanceData();
@@ -118,7 +116,7 @@ namespace RPGSkill
         {
             if (!IsActive)
                 return;
-            deltaTime = (long)(deltaTime * m_ExecSpeed + 0.5f);
+            deltaTime = (long)(deltaTime * m_InstanceData.ExecSpeed + 0.5f);
             m_curTime += deltaTime;
             if(m_Components != null)
             {

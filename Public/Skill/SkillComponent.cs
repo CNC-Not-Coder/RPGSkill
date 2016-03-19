@@ -7,6 +7,7 @@ namespace RPGSkill
         public int InstanceId = -1;
         public int SenderId = -1;
         public int TargetId = -1;
+        public float ExecSpeed = 1f;
         public int SkillId = -1;
         public float Cast_x = 0f;
         public float Cast_y = 0f;
